@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import AuthReducer from "./src/redux/reducer/auth.reducer";
+import Routes from "./src/routes/routes";
+import axios from "axios";
 
 export default function App() {
+  axios.defaults.baseURL = "https://api.imgur.com/";
+  const store = createStore(AuthReducer);
+  // axios.interceptors.request.use(
+  //   (config) => {
+  //     config.headers.Authorization = store.getState().auth.access_token;
+  //     console.log(store.getState().auth.access_token);
+
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <Routes />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
