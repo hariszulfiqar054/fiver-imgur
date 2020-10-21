@@ -4,13 +4,14 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 const AllImages = () => {
-	const access_token = useSelector((state) => state?.user?.access_token);
-	console.log(access_token);
+
+	const access_token = useSelector((state) => state?.user?.access_token);//Accessing token from redux store
+ 	console.log(access_token);
 	const [data, setData] = useState(null);
 	useEffect(() => {
 		getData();
 	}, []);
-	const getData = async () => {
+	const getData = async () => {// Get all images posted by the current user
 		try {
 			const response = await axios({
 				method: 'GET',

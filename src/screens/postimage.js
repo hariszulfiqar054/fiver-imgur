@@ -6,12 +6,12 @@ import { useSelector } from 'react-redux';
 
 const Postimage = ({ navigation }) => {
 	const [image, setImage] = useState(null);
-	const access_token = useSelector((state) => state?.user?.access_token);
+	const access_token = useSelector((state) => state?.user?.access_token);//Accessing token from the redux store
 
 	useEffect(() => {
 		getPermission();
 	}, []);
-	const getPermission = async () => {
+	const getPermission = async () => {//Get permission to access gallery of mobile
 		if (Platform.OS !== 'web') {
 			const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
 			if (status !== 'granted') {
@@ -20,7 +20,7 @@ const Postimage = ({ navigation }) => {
 		}
 	};
 
-	const pickImage = async () => {
+	const pickImage = async () => {// This activate the image picker to pick the image from  the gallery
 		let result = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.All,
 			allowsEditing: true,
@@ -38,7 +38,7 @@ const Postimage = ({ navigation }) => {
 		}
 	};
 
-	const postImage = async () => {
+	const postImage = async () => {//This method post the image to the imgur server
 		// console.log(image?.uri, "_____________-");
 		const formBody = new FormData();
 		formBody.append('image', {

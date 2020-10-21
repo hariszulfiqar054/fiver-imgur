@@ -7,7 +7,7 @@ import { saveUser } from "../redux/actions/auth.action";
 const Auth = () => {
   const dispatch = useDispatch();
   //Getting access token and saving it to redux store
-  const getAccessToken = async () => {
+  const getAccessToken = async () => {//Getting the access token and stored in the redux store to access it from anywhere
     try {
       const response = await axios.post("oauth2/token", {
         refresh_token: "8af91696ae6404e9262a099a568bc5f429a64e31",
